@@ -1,0 +1,135 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@gunupuru-sravani 
+chaithanyamanam
+/
+agecount
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+agecount/assignment1
+@chaithanyamanam
+chaithanyamanam Create assignment1
+Latest commit 2793a07 13 hours ago
+ History
+ 1 contributor
+107 lines (75 sloc)  3.51 KB
+   
+
+SQL> desc emp;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ EMPID                                              NUMBER(38)
+ EMPNAME                                            VARCHAR2(20)
+ DOB                                                DATE
+ PHNO                                               NUMBER(10)
+
+SQL> insert into emp values(1,'chaithu','9-dec-1998',9999897);
+
+1 row created.
+
+SQL> insert into emp values(1,'chavi','19-jan-2000',9923417);
+
+1 row created.
+
+SQL> insert into emp values(3,'chamu','29-march-1997',46417);
+
+1 row created.
+
+SQL> insert into emp values(4,'chanti','27-may-2001',987417);
+
+1 row created.
+
+SQL> insert into emp values(5,'chinni','5-feb-2000',765417);
+
+1 row created.
+
+SQL> select * from emp;
+
+     EMPID EMPNAME              DOB             PHNO
+---------- -------------------- --------- ----------
+         1 chaithu              09-DEC-98    9999897
+         1 chavi                19-JAN-00    9923417
+         3 chamu                29-MAR-97      46417
+         4 chanti               27-MAY-01     987417
+         5 chinni               05-FEB-00     765417
+
+SQL> select empid,empname,trunc((sysdate-to_date(dob))/365.25,0)as age from emp;
+
+     EMPID EMPNAME                     AGE
+---------- -------------------- ----------
+         1 chaithu                      23
+         2 chavi                        22
+         3 chamu                        24
+         4 chanti                       20
+         5 chinni                       22
+
+SQL> select empid,empname,trunc((sysdate-to_date(dob))) as days from emp;
+
+     EMPID EMPNAME                    DAYS
+---------- -------------------- ----------
+         1 chaithu                    8506
+         2 chavi                      8100
+         3 chamu                      9126
+         4 chanti                     7606
+         5 chinni                     8083
+SQL> update emp set joindate='1-jan-2019' where empid=1;
+
+1 row updated.
+
+SQL> update emp set joindate='23-mar-2020' where empid=2;
+
+1 row updated.
+
+SQL> update emp set joindate='5-may-2021' where empid=3;
+
+1 row updated.
+
+SQL> update emp set joindate='15-april-2020' where empid=4;
+
+1 row updated.
+
+SQL> update emp set joindate='25-jan-2022' where empid=5;
+
+1 row updated.
+
+SQL> select * from emp;
+
+     EMPID EMPNAME              DOB             PHNO JOINDATE
+---------- -------------------- --------- ---------- ---------
+         1 chaithu              09-DEC-98    9999897 01-JAN-19
+         2 chavi                19-JAN-00    9923417 23-MAR-20
+         3 chamu                29-MAR-97      46417 05-MAY-21
+         4 chanti               27-MAY-01     987417 15-APR-20
+         5 chinni               05-FEB-00     765417 25-JAN-22
+
+SQL> select empid,empname,trunc((sysdate-to_date(joindate))) as workingdays from emp;
+
+     EMPID EMPNAME              WORKINGDAYS
+---------- -------------------- -----------
+         1 chaithu                     1178
+         2 chavi                        731
+         3 chamu                        323
+         4 chanti                       708
+         5 chinni                        58
+
+SQL> select empid,empname,trunc((sysdate-to_date(joindate))/365) as workingyears from emp;
+
+     EMPID EMPNAME              WORKINGYEARS
+---------- -------------------- ------------
+         1 chaithu                         3
+         2 chavi                           2
+         3 chamu                           0
+         4 chanti                          1
+         5 chinni                          0
